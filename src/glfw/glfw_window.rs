@@ -1,19 +1,19 @@
 #![allow(dead_code)]
 
-use super::ffi;
+use super::glfw_bindgen;
 
 // Currently use single global state
 // TODO :: Use "user data" provided by the GLFW window
 pub static mut IS_RUNNING: bool = false;
 
 pub struct GLFWWindow {
-    pub window: *mut ffi::CGLFWwindow,
+    pub window: *mut glfw_bindgen::GLFWwindow,
 }
 
 impl Drop for GLFWWindow {
     fn drop(&mut self) {
         unsafe {
-            ffi::glfwDestroyWindow(self.window);
+            glfw_bindgen::glfwDestroyWindow(self.window);
         }
     }
 }
@@ -21,7 +21,7 @@ impl Drop for GLFWWindow {
 impl GLFWWindow {
     pub fn new() -> GLFWWindow {
         let window = unsafe {
-            ffi::glfwCreateWindow(
+            glfw_bindgen::glfwCreateWindow(
                 960,
                 540,
                 std::ffi::CString::new("title")
@@ -47,19 +47,19 @@ impl GLFWWindow {
 
     pub fn set_window_close_callback(&mut self) {
         unsafe {
-            ffi::glfwSetWindowCloseCallback(self.window, super::glfw_window_close_callback);
+            glfw_bindgen::glfwSetWindowCloseCallback(self.window, Some(super::glfw_window_close_callback));
         }
     }
 
     pub fn set_window_key_callback(&mut self) {
         unsafe {
-            ffi::glfwSetKeyCallback(self.window, super::glfw_key_callback);
+            glfw_bindgen::glfwSetKeyCallback(self.window, Some(super::glfw_key_callback));
         }
     }
 
     pub fn swap_buffer(&mut self) {
         unsafe {
-            ffi::glfwSwapBuffers(self.window);
+            glfw_bindgen::glfwSwapBuffers(self.window);
         }
     }
 }

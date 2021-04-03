@@ -5,7 +5,7 @@ fn main() {
 
     let mut window = glfw::GLFWWindow::new();
 
-    glfw::set_context(&window); // for OpenGL context
+    // glfw::set_context(&window); // for OpenGL context
 
     window.set_window_close_callback();
     window.set_window_key_callback();
