@@ -4,8 +4,8 @@
 #![allow(non_upper_case_globals)]
 #![allow(unused_unsafe)]
 
-mod glad_bindgen;
 mod glfw_bindgen;
+pub mod glad_bindgen;
 pub mod glfw_window;
 
 // re-exports
@@ -47,6 +47,12 @@ pub fn init() {
     unsafe {
         glfw_bindgen::glfwSetErrorCallback(Some(glfw_error_callback));
         assert_eq!(glfw_bindgen::glfwInit(), 1);
+    }
+}
+
+pub fn terminate() {
+    unsafe {
+        glfw_bindgen::glfwTerminate();
     }
 }
 

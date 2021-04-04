@@ -3,8 +3,9 @@ extern crate bindgen;
 
 fn main() {
     println!("cargo:rustc-link-search=libs/usr/local/lib/");
-    println!("cargo:rustc-link-lib=static=glfw3");
-    println!("cargo:rustc-link-lib=static=glad");
+    println!("cargo:rustc-link-lib=glfw3");
+    println!("cargo:rustc-link-lib=glad");
+    println!("cargo:rustc-link-lib=GL");
 
     // bindgen uses `libclang` & the custom path need to be defined
     std::env::set_var("LIBCLANG_PATH", "libs/usr/local/lib/");
